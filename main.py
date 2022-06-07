@@ -45,7 +45,7 @@ def main():
         # Get only the hosts that are online:
         hosts = GetOnlineHosts.get_online_hosts(network, exclusion)
         # Call to ArpSpoofing attack:
-        ArpPoison.arp_poison(hosts, router, interface)
+        ArpPoison.arp_spoofing(hosts, router, interface)
 
 
 if __name__ == "__main__":
